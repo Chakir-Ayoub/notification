@@ -4,6 +4,7 @@ import com.rent.flow.notification.EmailRequest;
 import com.rent.flow.notification.Utils.UserRegisteredEvent;
 import com.rent.flow.notification.service.MailService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/email")
 @CrossOrigin(origins = "https://cinecrewstaffing.com")
+@Slf4j
 public class EmailController {
 
     private final ApplicationEventPublisher publisher;
@@ -22,15 +24,22 @@ public class EmailController {
 
     @PostMapping("/send")
     public String sendContact(@RequestBody EmailRequest request) throws Exception {
-
+        log.info("Sending contact email request: {}", request.getEmail());
         String html = "<h2>New Contact Message</h2>"
                 + "<p><b>User Email:</b> " + request.getEmail() + "</p>";
+        try {
+            mailService.sendHtml(
+                    "mikeb75@gmail.com",
+                    "New Contact From Cinecrewstaffing",
+                    html
+            );
+            log.info("Mail sent successfully");
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new RuntimeException(e);
+        }
 
-        mailService.sendHtml(
-                "mikeb75@gmail.com",
-                "New Contact From Cinecrewstaffing",
-                html
-        );
+
 
         return "Message sent to owner";
     }
