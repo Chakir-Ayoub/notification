@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/email")
-@CrossOrigin("*")
+@CrossOrigin(origins = "https://cinecrewstaffing.com")
 public class EmailController {
 
     private final ApplicationEventPublisher publisher;
