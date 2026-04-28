@@ -27,7 +27,7 @@ public class EmailController {
                 + "<p><b>User Email:</b> " + request.getEmail() + "</p>";
 
         mailService.sendHtml(
-                "ayoub.chakir0926@gmail.com",
+                "mikeb75@gmail.com",
                 "New Contact From Cinecrewstaffing",
                 html
         );
