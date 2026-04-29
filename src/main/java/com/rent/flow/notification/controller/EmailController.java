@@ -43,7 +43,7 @@ public class EmailController {
 
     @PostMapping("/send/form")
     public String sendContactform(@RequestBody EmailRequest request) throws Exception {
-        log.info("Sending contact email request: {}", request.getEmail());
+        log.info("Sending contact email request: {}", request.toString());
         String html = "<h2>New Contact Form</h2>"
                 + "<p><b>FullName :</b> " + request.getFullName() + "</p>"
                 + "<p><b>User Email:</b> " + request.getEmail() + "</p>"
