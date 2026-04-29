@@ -38,9 +38,27 @@ public class EmailController {
             log.error(e.getMessage());
             throw new RuntimeException(e);
         }
+        return "Message sent to owner";
+    }
 
-
-
+    @PostMapping("/send/form")
+    public String sendContactform(@RequestBody EmailRequest request) throws Exception {
+        log.info("Sending contact email request: {}", request.getEmail());
+        String html = "<h2>New Contact Form</h2>"
+                + "<p><b>FullName :</b> " + request.getFullName() + "</p>"
+                + "<p><b>User Email:</b> " + request.getEmail() + "</p>"
+                + "<p><b>Message :</b> " + request.getMessage() + "</p>";
+        try {
+            mailService.sendHtml(
+                    "mikeb75@gmail.com",
+                    "New Contact From Blue Jade Ventures",
+                    html
+            );
+            log.info("Mail sent successfully");
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new RuntimeException(e);
+        }
         return "Message sent to owner";
     }
 }
