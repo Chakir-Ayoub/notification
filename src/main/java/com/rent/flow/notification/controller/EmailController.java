@@ -2,6 +2,7 @@ package com.rent.flow.notification.controller;
 
 import com.rent.flow.notification.EmailRequest;
 import com.rent.flow.notification.Utils.UserRegisteredEvent;
+import com.rent.flow.notification.dto.ContactFormDto;
 import com.rent.flow.notification.service.MailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -52,6 +53,31 @@ public class EmailController {
             mailService.sendHtml(
                     "mikeb75@gmail.com",
                     "New Contact From Blue Jade Ventures",
+                    html
+            );
+            log.info("Mail sent successfully");
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return "Message sent to owner";
+    }
+
+    @PostMapping("/send/ubik")
+    public String ubik(@RequestBody ContactFormDto request) throws Exception {
+        log.info("Sending contact email request: {}", request.toString());
+        String html = "<h2>New Contact Form</h2>"
+                + "<p><b>Name :</b> " + request.getName() + "</p>"
+                + "<p><b>Company :</b> " + request.getCompany() + "</p>"
+                + "<p><b>Email :</b> " + request.getEmail() + "</p>"
+                + "<p><b>EngagementType :</b> " + request.getEngagementType() + "</p>"
+                + "<p><b>PracticeArea :</b> " + request.getPracticeArea() + "</p>"
+                + "<p><b>Timeline :</b> " + request.getTimeline() + "</p>"
+                + "<p><b>Message :</b> " + request.getMessage() + "</p>";
+        try {
+            mailService.sendHtml(
+                    "ayoub.chakir0926@gmail.com",
+                    "New Contact Ubik",
                     html
             );
             log.info("Mail sent successfully");
