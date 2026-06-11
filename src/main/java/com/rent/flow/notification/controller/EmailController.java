@@ -70,9 +70,6 @@ public class EmailController {
                 + "<p><b>Name :</b> " + request.getName() + "</p>"
                 + "<p><b>Company :</b> " + request.getCompany() + "</p>"
                 + "<p><b>Email :</b> " + request.getEmail() + "</p>"
-                + "<p><b>EngagementType :</b> " + request.getEngagementType() + "</p>"
-                + "<p><b>PracticeArea :</b> " + request.getPracticeArea() + "</p>"
-                + "<p><b>Timeline :</b> " + request.getTimeline() + "</p>"
                 + "<p><b>Message :</b> " + request.getMessage() + "</p>";
         try {
             mailService.sendHtml(
